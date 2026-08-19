@@ -1,0 +1,4 @@
+from,to,status
+/product?id={legacy_id},resolve_by_verified_sku_then_301,mapping_required
+/catalog?brand={brand},/catalog/{brand}/,whitelist_after_audit
+/industrial/{placeholder},/vrv-vrf/,review_each_old_url

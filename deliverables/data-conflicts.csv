@@ -1,0 +1,7 @@
+id,entity,field,issue,action
+DATA_CONFLICT_001,Chigo Lotos on-off 169,model/folder name,Prompt reports a mismatch between one folder and filenames,Compare original files and official documentation
+DATA_CONFLICT_002,Chigo Moon on-off 181,model indices 61/88/100,Prompt reports possible index reordering in filenames,Verify against passports and original-resolution media
+DATA_GAP_001,Business,phone/email/address/legal details,Not supplied,Owner must confirm before publication
+DATA_GAP_002,Catalog,prices/availability/warranty,No synchronized source supplied,Connect verified price and stock source
+DATA_GAP_003,Products,technical characteristics and imagery,Public folder not materialized into this build,"Export recursively, OCR, deduplicate and link field provenance"
+DATA_GAP_004,Cases/reviews,publication evidence and consent,No verified records supplied,Keep draft/noindex until real records and consent exist
