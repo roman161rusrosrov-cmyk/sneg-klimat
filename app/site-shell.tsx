@@ -11,6 +11,7 @@ import GlobalSearch from "./global-search";
 
 const navigation = [
   ["/catalog", "Каталог"],
+  ["/ventilation", "Вентиляция"],
   ["/brands", "Бренды"],
   ["/solutions", "Решения"],
   ["/vrf", "VRV / VRF"],
@@ -18,6 +19,15 @@ const navigation = [
   ["/guides", "База знаний"],
   ["/tools", "Инструменты"],
 ] as const;
+
+export function BrandGlyph({ className = "" }: { className?: string }) {
+  return (
+    <svg className={`brand-glyph ${className}`.trim()} viewBox="0 0 48 48" aria-hidden="true">
+      <path d="M24 5v38M7.5 14.5l33 19M7.5 33.5l33-19" />
+      <path d="m24 5-4 5m4-5 4 5M24 43l-4-5m4 5 4-5M7.5 14.5l6 .5m-6-.5 2.5 5.5M40.5 33.5l-6-.5m6 .5-2.5-5.5M7.5 33.5l6-.5m-6 .5 2.5-5.5M40.5 14.5l-6 .5m6-.5-2.5 5.5" />
+    </svg>
+  );
+}
 
 export function BrandMark({ compact = false, inverse = false }: { compact?: boolean; inverse?: boolean }) {
   return (
@@ -47,6 +57,7 @@ export function SiteHeader() {
   return (
     <header className="site-header inner-site-header">
       <div className="shell header-inner">
+        <span className="header-glyph" aria-hidden="true"><BrandGlyph /></span>
         <Link className="logo-link" href="/"><BrandMark /></Link>
         <nav className="desktop-nav" aria-label="Основная навигация">
           {navigation.map(([href, label]) => <Link key={href} href={href}>{label}</Link>)}
@@ -75,6 +86,7 @@ export function SiteFooter() {
     <>
       <a className="floating-call" href={business.phoneHref} aria-label={`Позвонить менеджеру ${business.phoneDisplay}`}><Icon name="phone" /><span><small>Спросить менеджера</small><strong>{business.phoneDisplay}</strong></span></a>
       <footer>
+        <div className="footer-glyph-field" aria-hidden="true"><BrandGlyph /><BrandGlyph /><BrandGlyph /></div>
         <div className="shell footer-grid">
           <div><BrandMark inverse /><p>Подбор, поставка, монтаж и обслуживание климатических систем для дома и бизнеса.</p></div>
           <nav aria-label="Навигация в подвале"><strong>Разделы</strong>{navigation.map(([href, label]) => <Link key={href} href={href}>{label}</Link>)}<Link href="/calculator">Калькулятор</Link></nav>
@@ -98,8 +110,10 @@ export function PriceCall({ product, compact = false }: { product: string; compa
 export function PageIntro({ eyebrow, title, lead, fallback = "/" }: { eyebrow: string; title: string; lead: string; fallback?: string }) {
   return (
     <section className="inner-hero">
+      <div className="inner-hero-brand" aria-hidden="true"><BrandGlyph /><BrandGlyph /><BrandGlyph /></div>
       <div className="shell">
         <BackButton fallback={fallback} />
+        <div className="inner-brand-signature"><BrandMark compact /><span>инженерный климат</span></div>
         <p className="kicker">{eyebrow}</p>
         <h1>{title}</h1>
         <p>{lead}</p>

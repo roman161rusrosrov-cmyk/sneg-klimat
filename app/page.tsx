@@ -1,15 +1,16 @@
 import Link from "next/link";
-import { BrandMark, Icon, SiteFooter, SiteHeader } from "./site-shell";
+import { BrandGlyph, BrandMark, Icon, SiteFooter, SiteHeader } from "./site-shell";
 
 const routes = [
-  { href: "/catalog", number: "01", title: "Каталог", text: "44 серии Chigo, Haier, JAX, Rovex и Vickers с отдельной страницей каждой линейки.", tone: "blue" },
-  { href: "/brands", number: "02", title: "Бренды", text: "Пять самостоятельных каталогов с быстрым переходом к нужному производителю.", tone: "ice" },
-  { href: "/solutions", number: "03", title: "Решения по объекту", text: "Квартира, дом, офис, магазин, ресторан, гостиница, склад и производство.", tone: "navy" },
-  { href: "/vrf", number: "04", title: "VRV / VRF", text: "Отдельный инженерный раздел для многозональных систем и проектных исходных данных.", tone: "dark" },
-  { href: "/services", number: "05", title: "Услуги", text: "Обследование, расчёт, проектирование, монтаж, пусконаладка и сервис.", tone: "mint" },
-  { href: "/guides", number: "06", title: "База знаний", text: "Подбор мощности, сравнение технологий, приёмка монтажа и чек-лист VRV/VRF.", tone: "pale" },
-  { href: "/tools", number: "07", title: "Инструменты", text: "Поиск, бриф, подбор, диагностика, обслуживание, размещение, избранное и чек-листы.", tone: "blue" },
-  { href: "/faq", number: "08", title: "Частые вопросы", text: "Короткие ответы про цену, монтаж, вентиляцию, обслуживание и выбор системы.", tone: "ice" },
+  { href: "/catalog", number: "01", title: "Каталог кондиционеров", text: "44 серии Chigo, Haier, JAX, Rovex и Vickers с отдельной страницей каждой линейки.", tone: "blue", featured: false },
+  { href: "/ventilation", number: "02", title: "Вентиляция", text: "Приточные, вытяжные, приточно-вытяжные и локальные системы, рекуперация и решения для бизнеса.", tone: "vent", featured: true },
+  { href: "/brands", number: "03", title: "Бренды", text: "Пять самостоятельных каталогов с быстрым переходом к нужному производителю.", tone: "ice", featured: false },
+  { href: "/solutions", number: "04", title: "Решения по объекту", text: "Квартира, дом, офис, магазин, ресторан, гостиница, склад и производство.", tone: "navy", featured: false },
+  { href: "/vrf", number: "05", title: "VRV / VRF", text: "Отдельный инженерный раздел для многозональных систем и проектных исходных данных.", tone: "dark", featured: false },
+  { href: "/services", number: "06", title: "Услуги", text: "Обследование, расчёт, проектирование, монтаж, пусконаладка и сервис.", tone: "mint", featured: false },
+  { href: "/guides", number: "07", title: "База знаний", text: "Подбор мощности, сравнение технологий, приёмка монтажа и чек-лист VRV/VRF.", tone: "pale", featured: false },
+  { href: "/tools", number: "08", title: "Инструменты", text: "Поиск, бриф, подбор, диагностика, обслуживание, размещение, избранное и чек-листы.", tone: "blue", featured: false },
+  { href: "/faq", number: "09", title: "Частые вопросы", text: "Короткие ответы про цену, монтаж, вентиляцию, обслуживание и выбор системы.", tone: "ice", featured: false },
 ] as const;
 
 export default function Home() {
@@ -19,8 +20,10 @@ export default function Home() {
       <main className="home-hub">
         <section className="home-hero">
           <div className="hero-aurora" aria-hidden="true" />
+          <div className="home-hero-glyphs" aria-hidden="true"><BrandGlyph /><BrandGlyph /><BrandGlyph /><BrandGlyph /></div>
           <div className="shell home-hero-grid">
             <div className="home-hero-copy">
+              <div className="home-hero-brand"><BrandMark inverse /></div>
               <p className="eyebrow"><span /> Инженерный подбор климатических систем</p>
               <h1>Комфортный климат.<br /><em>Точно по расчёту.</em></h1>
               <p className="hero-lead">Подбираем кондиционирование, вентиляцию и VRV/VRF‑системы для квартир, домов и коммерческих объектов. Выберите нужное направление или получите предварительный расчёт.</p>
@@ -31,7 +34,7 @@ export default function Home() {
               <div className="home-facts" aria-label="Состав каталога">
                 <span><strong>44</strong> серии</span>
                 <span><strong>5</strong> брендов</span>
-                <span><strong>8</strong> типов объектов</span>
+                <span><strong>6</strong> направлений вентиляции</span>
               </div>
             </div>
 
@@ -53,8 +56,9 @@ export default function Home() {
             </div>
             <div className="hub-card-grid">
               {routes.map((route) => (
-                <Link className={`hub-card hub-card-${route.tone}`} href={route.href} key={route.href}>
+                <Link className={`hub-card hub-card-${route.tone}${route.featured ? " hub-card-featured" : ""}`} href={route.href} key={route.href}>
                   <span>{route.number}</span>
+                  <BrandGlyph />
                   <div><h2>{route.title}</h2><p>{route.text}</p></div>
                   <i><Icon name="arrow" /></i>
                 </Link>

@@ -6,6 +6,13 @@ import { series } from "./catalog-data";
 
 const pages = [
   { href: "/catalog", title: "Каталог оборудования", group: "Раздел", text: "Все серии, бренды и обозначения моделей" },
+  { href: "/ventilation", title: "Вентиляция", group: "Раздел", text: "Приток, вытяжка, рекуперация, локальные и коммерческие системы" },
+  { href: "/ventilation/supply", title: "Приточная вентиляция", group: "Вентиляция", text: "Организованная подача и фильтрация наружного воздуха" },
+  { href: "/ventilation/exhaust", title: "Вытяжная вентиляция", group: "Вентиляция", text: "Удаление влаги, запахов и загрязнённого воздуха" },
+  { href: "/ventilation/supply-exhaust", title: "Приточно-вытяжная вентиляция", group: "Вентиляция", text: "Согласованная подача и удаление воздуха" },
+  { href: "/ventilation/heat-recovery", title: "Вентиляция с рекуперацией", group: "Вентиляция", text: "Возврат части тепла удаляемого воздуха" },
+  { href: "/ventilation/local", title: "Локальная вентиляция", group: "Вентиляция", text: "Компактные решения для одной комнаты" },
+  { href: "/ventilation/commercial", title: "Коммерческая вентиляция", group: "Вентиляция", text: "Офисы, торговля, рестораны, склады и производство" },
   { href: "/brands", title: "Бренды", group: "Раздел", text: "Chigo, Haier, JAX, Rovex и Vickers" },
   { href: "/solutions", title: "Решения по объекту", group: "Раздел", text: "Квартира, дом, офис, магазин, ресторан, гостиница, склад и производство" },
   { href: "/vrf", title: "VRV / VRF", group: "Раздел", text: "Многозональные климатические системы" },
@@ -83,7 +90,7 @@ export default function GlobalSearch() {
             <p>{query ? `Результаты: ${results.length}` : "Популярные разделы"}</p>
             {results.length ? results.map((item) => <Link href={item.href} key={item.key} onClick={close}><span><small>{item.group}</small><strong>{item.title}</strong><em>{item.text}</em></span><b aria-hidden="true">→</b></Link>) : <div className="empty-search">Ничего не найдено. Попробуйте название бренда, серии или обозначение модели.</div>}
           </div>
-          {!query && <div className="search-hints"><span>Быстрый запрос</span>{["Haier", "R32", "VRF", "сервис"].map((hint) => <button type="button" key={hint} onClick={() => setQuery(hint)}>{hint}</button>)}</div>}
+          {!query && <div className="search-hints"><span>Быстрый запрос</span>{["Вентиляция", "Haier", "VRF", "сервис"].map((hint) => <button type="button" key={hint} onClick={() => setQuery(hint)}>{hint}</button>)}</div>}
         </section>
       </div>}
     </>

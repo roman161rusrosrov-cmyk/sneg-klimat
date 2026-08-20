@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     description,
     type: "website",
     url: siteUrl,
-    images: [{ url: socialImageUrl.toString(), width: 1672, height: 941, alt: "СНЕГ — комфортный климат, точно по расчёту" }],
+    images: [{ url: socialImageUrl.toString(), width: 1672, height: 941, alt: "СНЕГ — кондиционирование и вентиляция" }],
   },
   twitter: {
     card: "summary_large_image",
