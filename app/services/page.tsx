@@ -10,7 +10,7 @@ export default function ServicesPage() {
     <InnerLayout>
       <PageIntro eyebrow="Услуги" title="От обследования до сервиса" lead="Ведём проект по понятным этапам: обследование, расчёт, поставка, монтаж, пусконаладка и обслуживание." />
       <section className="inner-section process-section"><div className="shell process-grid">{serviceSteps.map((step) => <article key={step.n}><span>{step.n}</span><div className="process-icon"><i /><i /></div><h2>{step.title}</h2><p>{step.text}</p></article>)}</div></section>
-      <section className="inner-section"><div className="shell service-handoff"><div><p className="kicker">Первый шаг</p><h2>Подготовьте исходные данные</h2><p>Скачайте предварительный бриф с площадью, высотой, количеством зон, людьми и теплопритоками от техники.</p></div><Link className="button button-primary" href="/calculator">Открыть расчёт <Icon name="arrow" /></Link></div></section>
+      <section className="inner-section"><div className="shell service-handoff"><div><p className="kicker">Первый шаг</p><h2>Подготовьте исходные данные</h2><p>Соберите предварительный бриф с площадью, высотой, количеством зон, людьми и теплопритоками от техники.</p></div><Link className="button button-primary" href="/brief">Собрать бриф <Icon name="arrow" /></Link></div></section>
     </InnerLayout>
   );
 }

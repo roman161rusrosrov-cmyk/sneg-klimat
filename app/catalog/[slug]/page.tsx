@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { series } from "../../catalog-data";
 import { InnerLayout, PageIntro, SeriesCover, Icon, PriceCall } from "../../site-shell";
 import ProductShare from "../product-share";
+import ModelList from "../model-list";
 
 export const dynamicParams = false;
 
@@ -49,7 +50,7 @@ export default async function SeriesPage({ params }: { params: Promise<{ slug: s
               {record.refrigerant && <span>Хладагент {record.refrigerant}</span>}
               <span>{record.models.length} обозначений</span>
             </div>
-            <ul className="model-list">{record.models.map((model) => <li key={model}>{model}</li>)}</ul>
+            <ModelList models={record.models} />
             {record.variants && <div className="product-variants"><strong>Варианты исполнения</strong><div>{record.variants.map((variant) => <span key={variant}>{variant}</span>)}</div></div>}
             {record.note && <p className="source-note"><strong>Уточнение по серии:</strong> {record.note}</p>}
             <PriceCall product={`${record.brand} ${record.name}`} />

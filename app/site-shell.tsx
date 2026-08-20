@@ -7,6 +7,7 @@ import BackButton from "./back-button";
 import { business } from "./business-config";
 import { publicAsset } from "./public-path";
 import type { SeriesRecord } from "./catalog-data";
+import GlobalSearch from "./global-search";
 
 const navigation = [
   ["/catalog", "Каталог"],
@@ -51,12 +52,14 @@ export function SiteHeader() {
           {navigation.map(([href, label]) => <Link key={href} href={href}>{label}</Link>)}
         </nav>
         <div className="header-actions">
+          <GlobalSearch />
           <a className="header-phone" href={business.phoneHref} aria-label={`Позвонить ${business.phoneDisplay}`}><Icon name="phone" /><span>{business.phoneDisplay}</span></a>
           <Link className="header-cta" href="/calculator">Получить расчёт</Link>
           <details className="page-menu">
             <summary aria-label="Открыть меню"><Icon name="menu" /></summary>
             <nav aria-label="Мобильное меню">
               {navigation.map(([href, label]) => <Link key={href} href={href}>{label}<Icon name="arrow" /></Link>)}
+              <Link href="/favorites">Избранное<Icon name="arrow" /></Link>
               <Link href="/calculator">Калькулятор<Icon name="arrow" /></Link>
               <a href={business.phoneHref}>Позвонить · {business.phoneDisplay}<Icon name="phone" /></a>
             </nav>

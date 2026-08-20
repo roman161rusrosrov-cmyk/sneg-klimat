@@ -8,7 +8,7 @@ const routes = [
   { href: "/vrf", number: "04", title: "VRV / VRF", text: "Отдельный инженерный раздел для многозональных систем и проектных исходных данных.", tone: "dark" },
   { href: "/services", number: "05", title: "Услуги", text: "Обследование, расчёт, проектирование, монтаж, пусконаладка и сервис.", tone: "mint" },
   { href: "/guides", number: "06", title: "База знаний", text: "Подбор мощности, сравнение технологий, приёмка монтажа и чек-лист VRV/VRF.", tone: "pale" },
-  { href: "/tools", number: "07", title: "Инструменты", text: "Умный подбор, избранное, сравнение систем, чек-листы и климатический словарь.", tone: "blue" },
+  { href: "/tools", number: "07", title: "Инструменты", text: "Поиск, бриф, подбор, диагностика, обслуживание, размещение, избранное и чек-листы.", tone: "blue" },
   { href: "/faq", number: "08", title: "Частые вопросы", text: "Короткие ответы про цену, монтаж, вентиляцию, обслуживание и выбор системы.", tone: "ice" },
 ] as const;
 
@@ -74,8 +74,8 @@ export default function Home() {
 
         <section className="home-calculator-cta">
           <div className="shell home-calculator-inner">
-            <div><p className="kicker kicker-light">Отдельный инструмент</p><h2>Подготовьте климатический бриф</h2><p>Предварительный калькулятор открывается на собственной странице и не отправляет введённые данные.</p></div>
-            <Link className="button button-light" href="/calculator">Перейти к расчёту <Icon name="arrow" /></Link>
+            <div><p className="kicker kicker-light">Отдельный инструмент</p><h2>Подготовьте климатический бриф</h2><p>Соберите исходные параметры объекта без имени, адреса и контактов, а затем скачайте готовый текст.</p></div>
+            <Link className="button button-light" href="/brief">Собрать бриф <Icon name="arrow" /></Link>
           </div>
         </section>
       </main>

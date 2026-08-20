@@ -8,7 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://roman161rusrosrov-cmyk.github.io/sneg-klimat/";
   const base = new URL(siteUrl.endsWith("/") ? siteUrl : `${siteUrl}/`);
   const url = (path = "") => new URL(path.replace(/^\//, ""), base).toString();
-  const core = ["", "catalog", "brands", "solutions", "vrf", "services", "guides", "calculator", "tools", "selection", "favorites", "compare", "checklists", "glossary", "faq", "site-info"];
+  const core = ["", "catalog", "brands", "solutions", "vrf", "services", "guides", "calculator", "tools", "selection", "brief", "favorites", "favorites-compare", "compare", "placement", "maintenance", "troubleshooting", "project-stages", "checklists", "myths", "glossary", "faq", "site-info"];
 
   return [
     ...core.map((path) => ({ url: url(path), changeFrequency: "weekly" as const, priority: path ? 0.8 : 1 })),
