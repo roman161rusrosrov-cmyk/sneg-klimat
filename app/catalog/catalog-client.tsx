@@ -77,7 +77,7 @@ export default function CatalogClient({ initialBrand = "Все" }: { initialBran
       <div className="brand-tabs" role="group" aria-label="Фильтр по бренду">
         {brands.map((item) => <button key={item} className={brand === item ? "active" : ""} onClick={() => { setBrand(item); setFavoritesOnly(false); setVisible(18); }}>{item}<small>{item === "Все" ? series.length : series.filter((row) => row.brand === item).length}</small></button>)}
       </div>
-      <div className="results-line"><span>Найдено серий: <strong>{filtered.length}</strong></span><span>Выберите серию или сразу уточните актуальную цену у менеджера</span></div>
+      <div className="results-line"><span>Найдено серий: <strong>{filtered.length}</strong></span><span>Выберите серию или <Link className="inline-tool-link" href="/favorites">откройте всё избранное</Link></span></div>
 
       {filtered.length > 0 ? <div className="series-grid">
         {filtered.slice(0, visible).map((item: SeriesRecord) => {

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { series } from "../../catalog-data";
 import { InnerLayout, PageIntro, SeriesCover, Icon, PriceCall } from "../../site-shell";
+import ProductShare from "../product-share";
 
 export const dynamicParams = false;
 
@@ -53,6 +54,7 @@ export default async function SeriesPage({ params }: { params: Promise<{ slug: s
             {record.note && <p className="source-note"><strong>Уточнение по серии:</strong> {record.note}</p>}
             <PriceCall product={`${record.brand} ${record.name}`} />
             <div className="product-actions"><Link className="button button-primary" href="/calculator">Рассчитать мощность <Icon name="arrow" /></Link><Link className="button button-ghost" href={`/brands/${record.brand.toLowerCase()}`}>Все серии {record.brand}</Link></div>
+            <ProductShare title={`${record.brand} ${record.name}`} />
           </div>
         </div>
       </section>

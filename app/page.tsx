@@ -8,6 +8,8 @@ const routes = [
   { href: "/vrf", number: "04", title: "VRV / VRF", text: "Отдельный инженерный раздел для многозональных систем и проектных исходных данных.", tone: "dark" },
   { href: "/services", number: "05", title: "Услуги", text: "Обследование, расчёт, проектирование, монтаж, пусконаладка и сервис.", tone: "mint" },
   { href: "/guides", number: "06", title: "База знаний", text: "Подбор мощности, сравнение технологий, приёмка монтажа и чек-лист VRV/VRF.", tone: "pale" },
+  { href: "/tools", number: "07", title: "Инструменты", text: "Умный подбор, избранное, сравнение систем, чек-листы и климатический словарь.", tone: "blue" },
+  { href: "/faq", number: "08", title: "Частые вопросы", text: "Короткие ответы про цену, монтаж, вентиляцию, обслуживание и выбор системы.", tone: "ice" },
 ] as const;
 
 export default function Home() {
@@ -58,6 +60,15 @@ export default function Home() {
                 </Link>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section className="home-trust">
+          <div className="shell home-trust-grid">
+            <div><span>01</span><strong>Без форм и регистрации</strong><p>Для просмотра каталога и расчёта не нужны имя, почта или номер телефона.</p></div>
+            <div><span>02</span><strong>Расчёт на устройстве</strong><p>Параметры калькулятора не отправляются через сайт.</p></div>
+            <div><span>03</span><strong>Без рекламных трекеров</strong><p>В коде сайта нет собственных счётчиков и рекламных пикселей.</p></div>
+            <Link href="/site-info"><span>04</span><strong>Прозрачные правила</strong><p>Что хранится локально и как работает связь с менеджером.</p><Icon name="arrow" /></Link>
           </div>
         </section>
 

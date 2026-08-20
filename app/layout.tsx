@@ -7,6 +7,14 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://roman161rusrosrov-c
 const siteBase = new URL(siteUrl.endsWith("/") ? siteUrl : `${siteUrl}/`);
 const faviconUrl = new URL("favicon.svg", siteBase);
 const socialImageUrl = new URL("og.png", siteBase);
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "СНЕГ — кондиционирование и вентиляция",
+  url: siteBase.toString(),
+  inLanguage: "ru-RU",
+  description,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -32,5 +40,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="ru"><body>{children}</body></html>;
+  return <html lang="ru"><body>{children}<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} /></body></html>;
 }

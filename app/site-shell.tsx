@@ -15,6 +15,7 @@ const navigation = [
   ["/vrf", "VRV / VRF"],
   ["/services", "Услуги"],
   ["/guides", "База знаний"],
+  ["/tools", "Инструменты"],
 ] as const;
 
 export function BrandMark({ compact = false, inverse = false }: { compact?: boolean; inverse?: boolean }) {
@@ -68,14 +69,17 @@ export function SiteHeader() {
 
 export function SiteFooter() {
   return (
-    <footer>
-      <div className="shell footer-grid">
-        <div><BrandMark inverse /><p>Подбор, поставка, монтаж и обслуживание климатических систем для дома и бизнеса.</p></div>
-        <nav aria-label="Навигация в подвале"><strong>Разделы</strong>{navigation.map(([href, label]) => <Link key={href} href={href}>{label}</Link>)}<Link href="/calculator">Калькулятор</Link></nav>
-        <div className="footer-contact"><strong>Связаться с менеджером</strong><a href={business.phoneHref}><Icon name="phone" />{business.phoneDisplay}</a><p>Позвоните, чтобы уточнить цену, наличие и подобрать модель под ваш объект.</p></div>
-      </div>
-      <div className="shell footer-bottom"><span>© 2026 СНЕГ</span><span>Расчёты на сайте имеют предварительный характер</span></div>
-    </footer>
+    <>
+      <a className="floating-call" href={business.phoneHref} aria-label={`Позвонить менеджеру ${business.phoneDisplay}`}><Icon name="phone" /><span><small>Спросить менеджера</small><strong>{business.phoneDisplay}</strong></span></a>
+      <footer>
+        <div className="shell footer-grid">
+          <div><BrandMark inverse /><p>Подбор, поставка, монтаж и обслуживание климатических систем для дома и бизнеса.</p></div>
+          <nav aria-label="Навигация в подвале"><strong>Разделы</strong>{navigation.map(([href, label]) => <Link key={href} href={href}>{label}</Link>)}<Link href="/calculator">Калькулятор</Link></nav>
+          <div className="footer-contact"><strong>Связаться с менеджером</strong><a href={business.phoneHref}><Icon name="phone" />{business.phoneDisplay}</a><p>Позвоните, чтобы уточнить цену, наличие и подобрать модель под ваш объект.</p></div>
+        </div>
+        <div className="shell footer-bottom"><span>© 2026 СНЕГ</span><nav aria-label="Справочная информация"><Link href="/faq">Частые вопросы</Link><Link href="/site-info">Как работает сайт</Link></nav></div>
+      </footer>
+    </>
   );
 }
 
