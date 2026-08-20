@@ -21,7 +21,7 @@ export default function Home() {
             <div className="home-hero-copy">
               <p className="eyebrow"><span /> Инженерный подбор климатических систем</p>
               <h1>Комфортный климат.<br /><em>Точно по расчёту.</em></h1>
-              <p className="hero-lead">Главная страница помогает выбрать направление. Каталог, VRV/VRF, решения, услуги и материалы открываются отдельно — без длинной страницы со всеми разделами подряд.</p>
+              <p className="hero-lead">Подбираем кондиционирование, вентиляцию и VRV/VRF‑системы для квартир, домов и коммерческих объектов. Выберите нужное направление или получите предварительный расчёт.</p>
               <div className="hero-actions">
                 <Link className="button button-primary" href="/catalog">Открыть каталог <Icon name="arrow" /></Link>
                 <Link className="button button-ghost" href="/calculator">Получить расчёт</Link>

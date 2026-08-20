@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "Бренды кондиционер�
 export default function BrandsPage() {
   return (
     <InnerLayout>
-      <PageIntro eyebrow="Бренды" title="Пять каталогов в одной системе" lead="Все бренды из предоставленного Яндекс.Диска разобраны по сериям и связаны с отдельными страницами." />
+      <PageIntro eyebrow="Бренды" title="Пять каталогов в одной системе" lead="Серии Chigo, Haier, JAX, Rovex и Vickers собраны в отдельных каталогах с быстрым переходом к каждой линейке." />
       <section className="inner-section"><div className="shell brand-page-grid">{brandProfiles.map((brand) => <Link href={`/brands/${brand.slug}`} key={brand.slug} className={`brand-page-card brand-tone-${brand.slug}`}><span>{brand.name.slice(0, 1)}</span><div><small>{series.filter((item) => item.brand === brand.name).length} серий</small><h2>{brand.name}</h2><p>{brand.description}</p></div><Icon name="arrow" /></Link>)}</div></section>
     </InnerLayout>
   );

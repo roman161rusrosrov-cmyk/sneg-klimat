@@ -5,7 +5,7 @@ import { brandProfiles, guides, objectSolutions } from "./site-content";
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sneg-klimat.clydemarlon809751.chatgpt.site/";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://roman161rusrosrov-cmyk.github.io/sneg-klimat/";
   const base = new URL(siteUrl.endsWith("/") ? siteUrl : `${siteUrl}/`);
   const url = (path = "") => new URL(path.replace(/^\//, ""), base).toString();
   const core = ["", "catalog", "brands", "solutions", "vrf", "services", "guides", "calculator"];

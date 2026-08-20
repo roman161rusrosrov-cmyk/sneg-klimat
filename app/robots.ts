@@ -4,7 +4,7 @@ export const dynamic = "force-static";
 
 export default function robots(): MetadataRoute.Robots {
   const isGitHubPages = process.env.GITHUB_PAGES === "true";
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sneg-klimat.clydemarlon809751.chatgpt.site/";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://roman161rusrosrov-cmyk.github.io/sneg-klimat/";
   const base = siteUrl.endsWith("/") ? siteUrl : `${siteUrl}/`;
 
   return {

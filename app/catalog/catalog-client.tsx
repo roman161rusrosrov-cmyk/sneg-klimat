@@ -1,13 +1,13 @@
 "use client";
 
-/* Catalog images are already normalized WebP assets and must keep their static public paths. */
+/* Product artwork is served as pre-optimized static WebP assets. */
 /* eslint-disable @next/next/no-img-element */
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { series, type SeriesRecord } from "../catalog-data";
 import { publicAsset } from "../public-path";
-import { Icon } from "../site-shell";
+import { Icon, PriceCall } from "../site-shell";
 
 const brands = ["Все", "Haier", "Chigo", "JAX", "Rovex", "Vickers"] as const;
 type BrandFilter = (typeof brands)[number];
@@ -77,7 +77,7 @@ export default function CatalogClient({ initialBrand = "Все" }: { initialBran
       <div className="brand-tabs" role="group" aria-label="Фильтр по бренду">
         {brands.map((item) => <button key={item} className={brand === item ? "active" : ""} onClick={() => { setBrand(item); setFavoritesOnly(false); setVisible(18); }}>{item}<small>{item === "Все" ? series.length : series.filter((row) => row.brand === item).length}</small></button>)}
       </div>
-      <div className="results-line"><span>Найдено серий: <strong>{filtered.length}</strong></span><span>44 серии связаны с реальными обложками из исходных материалов</span></div>
+      <div className="results-line"><span>Найдено серий: <strong>{filtered.length}</strong></span><span>Выберите серию или сразу уточните актуальную цену у менеджера</span></div>
 
       {filtered.length > 0 ? <div className="series-grid">
         {filtered.slice(0, visible).map((item: SeriesRecord) => {
@@ -97,6 +97,7 @@ export default function CatalogClient({ initialBrand = "Все" }: { initialBran
               <p className="model-line">{item.models.slice(0, 3).join(" · ")}{item.models.length > 3 ? ` · +${item.models.length - 3}` : ""}</p>
               {item.variants && <p className="variant-line">Варианты: {item.variants.join(", ")}</p>}
               <div className="series-actions"><Link className="text-link" href={`/catalog/${item.slug}`}>Открыть серию <Icon name="arrow" /></Link><button className={`round-action${liked ? " active" : ""}`} aria-label={liked ? "Удалить из избранного" : "Добавить в избранное"} aria-pressed={liked} onClick={() => toggleFavorite(item.slug)}>♡</button></div>
+              <PriceCall product={`${item.brand} ${item.name}`} compact />
             </div>
           </article>;
         })}

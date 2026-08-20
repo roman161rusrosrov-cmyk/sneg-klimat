@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 const title = "СНЕГ — кондиционирование и вентиляция";
-const description = "Подбор кондиционеров, вентиляции и VRV/VRF‑систем для дома и бизнеса. Инженерный подход без неподтверждённых обещаний.";
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sneg-klimat.clydemarlon809751.chatgpt.site";
+const description = "Подбор кондиционеров, вентиляции и VRV/VRF‑систем для дома и бизнеса. Расчёт, поставка, монтаж и сервис.";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://roman161rusrosrov-cmyk.github.io/sneg-klimat/";
 const siteBase = new URL(siteUrl.endsWith("/") ? siteUrl : `${siteUrl}/`);
 const faviconUrl = new URL("favicon.svg", siteBase);
 const socialImageUrl = new URL("og.png", siteBase);

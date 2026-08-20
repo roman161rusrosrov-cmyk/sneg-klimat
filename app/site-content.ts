@@ -1,9 +1,9 @@
 export const brandProfiles = [
-  { slug: "chigo", name: "Chigo", lead: "5 серий", description: "Инверторные и On/Off-линейки из предоставленной структуры материалов: Sunrise, Alba, King, Lotos и Moon." },
-  { slug: "haier", name: "Haier", lead: "11 серий", description: "Линейки Jade, Flexis, Stellar, Coral, Tundra, Quantum и Leader-A с подтверждёнными названиями моделей и цветов из исходных папок." },
-  { slug: "jax", name: "JAX", lead: "8 серий", description: "Murray, Hayman, Brisbane, Tasmania, Melbourne, York, Adelaide и Darwin. Для части серий в исходниках указан хладагент R32." },
+  { slug: "chigo", name: "Chigo", lead: "5 серий", description: "Инверторные и On/Off-линейки Sunrise, Alba, King, Lotos и Moon для жилых и коммерческих объектов." },
+  { slug: "haier", name: "Haier", lead: "11 серий", description: "Линейки Jade, Flexis, Stellar, Coral, Tundra, Quantum и Leader-A с различными моделями и цветовыми исполнениями." },
+  { slug: "jax", name: "JAX", lead: "8 серий", description: "Murray, Hayman, Brisbane, Tasmania, Melbourne, York, Adelaide и Darwin. Часть серий работает на хладагенте R32." },
   { slug: "rovex", name: "Rovex", lead: "14 серий", description: "Самая широкая ветка каталога: Smart, Star, Rich, Megapolis, City, Mira, Grace и новые серии CST5/CBS5." },
-  { slug: "vickers", name: "Vickers", lead: "6 серий", description: "ROOK, Tanya, Tanya Max, VERA, VERA MAX и VIKING — с реальными карточками из предоставленного каталога." },
+  { slug: "vickers", name: "Vickers", lead: "6 серий", description: "ROOK, Tanya, Tanya Max, VERA, VERA MAX и VIKING — шесть серий для разных задач и бюджетов." },
 ] as const;
 
 export const objectSolutions = [

@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "База знаний — СНЕГ",
 export default function GuidesPage() {
   return (
     <InnerLayout>
-      <PageIntro eyebrow="База знаний" title="Разобраться до покупки" lead="Короткие инженерные материалы без вымышленных характеристик и опасных советов по самостоятельному ремонту." />
+      <PageIntro eyebrow="База знаний" title="Разобраться до покупки" lead="Короткие инженерные материалы о подборе оборудования, технологиях и контроле качества монтажа." />
       <section className="inner-section"><div className="shell guide-grid">{guides.map((guide, index) => <Link href={`/guides/${guide.slug}`} className="guide-card" key={guide.slug}><span>0{index + 1}</span><div><h2>{guide.title}</h2><p>{guide.lead}</p></div><Icon name="arrow" /></Link>)}</div></section>
     </InnerLayout>
   );
