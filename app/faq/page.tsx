@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { InnerLayout, PageIntro, Icon } from "../site-shell";
+import { InnerLayout, PageIntro, PriceCall, Icon } from "../site-shell";
 
 export const metadata: Metadata = { title: "Частые вопросы о климатических системах — СНЕГ", description: "Ответы о выборе, цене, монтаже, вентиляции, обслуживании и VRV/VRF." };
 
@@ -22,5 +22,5 @@ const questions = [
 ] as const;
 
 export default function FaqPage() {
-  return <InnerLayout><PageIntro eyebrow="Коротко о важном" title="Частые вопросы" lead="Понятные ответы без обещаний, которые можно дать только после обследования и расчёта." fallback="/tools" /><section className="inner-section faq-page-section"><div className="shell faq-page-layout"><aside><p className="kicker">Быстрый старт</p><h2>Не нашли свой вопрос?</h2><p>Пройдите предварительный подбор или позвоните менеджеру. Для цены и наличия звонок остаётся самым быстрым способом.</p><Link className="button button-primary" href="/selection">Начать подбор <Icon name="arrow" /></Link></aside><div className="faq-page-list">{questions.map(([question, answer], index) => <details key={question} open={index === 0}><summary><span>{String(index + 1).padStart(2, "0")}</span><strong>{question}</strong><i>+</i></summary><p>{answer}</p></details>)}</div></div></section></InnerLayout>;
+  return <InnerLayout><PageIntro eyebrow="Коротко о важном" title="Частые вопросы" lead="Понятные ответы без обещаний, которые можно дать только после обследования и расчёта." fallback="/tools" /><section className="inner-section faq-page-section"><div className="shell faq-page-layout"><aside><p className="kicker">Быстрый старт</p><h2>Не нашли свой вопрос?</h2><p>Пройдите предварительный подбор или позвоните менеджеру. Для цены и наличия звонок остаётся самым быстрым способом.</p><Link className="button button-primary" href="/selection">Начать подбор <Icon name="arrow" /></Link><PriceCall product="консультацию по климатической системе" compact /></aside><div className="faq-page-list">{questions.map(([question, answer], index) => <details key={question} open={index === 0}><summary><span>{String(index + 1).padStart(2, "0")}</span><strong>{question}</strong><i>+</i></summary><p>{answer}</p></details>)}</div></div></section></InnerLayout>;
 }

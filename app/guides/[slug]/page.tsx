@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { guides } from "../../site-content";
-import { InnerLayout, PageIntro, Icon } from "../../site-shell";
+import { InnerLayout, ManagerBanner, PageIntro, Icon } from "../../site-shell";
 
 export const dynamicParams = false;
 export function generateStaticParams() { return guides.map((guide) => ({ slug: guide.slug })); }
@@ -18,6 +18,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
     <InnerLayout>
       <PageIntro eyebrow="База знаний" title={guide.title} lead={guide.lead} fallback="/guides" />
       <article className="inner-section"><div className="shell article-body">{guide.sections.map((section, index) => <section key={section.title}><span>0{index + 1}</span><div><h2>{section.title}</h2><p>{section.text}</p></div></section>)}<div className="article-cta"><strong>Нужен предварительный ориентир?</strong><Link className="button button-primary" href="/calculator">Открыть калькулятор <Icon name="arrow" /></Link></div></div></article>
+      <ManagerBanner title="Применить материал к вашему объекту" text="Общие рекомендации важно проверить по планировке, режиму эксплуатации и документации конкретного оборудования." product={`консультацию: ${guide.title}`} secondaryHref="/brief" secondaryLabel="Подготовить исходные данные" />
     </InnerLayout>
   );
 }

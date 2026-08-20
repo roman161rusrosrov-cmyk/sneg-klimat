@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { InnerLayout, PageIntro, Icon } from "../site-shell";
+import { BrandGlyph, CategoryShowcase, InnerLayout, ManagerBanner, PageIntro, Icon } from "../site-shell";
 
 export const metadata: Metadata = {
   title: "Инструменты для подбора климата — СНЕГ",
@@ -27,7 +27,9 @@ export default function ToolsPage() {
   return (
     <InnerLayout>
       <PageIntro eyebrow="Полезные сервисы" title="Инструменты без регистрации" lead="Работают прямо в браузере и не требуют отправлять имя, почту или номер телефона." />
-      <section className="inner-section tools-section"><div className="shell tools-grid">{tools.map((item, index) => <Link className="tool-card" href={item.href} key={item.href}><div className="tool-card-top"><span>{item.icon}</span><small>{item.tag}</small></div><p>{String(index + 1).padStart(2, "0")}</p><h2>{item.title}</h2><div>{item.text}</div><i><Icon name="arrow" /></i></Link>)}</div></section>
+      <CategoryShowcase eyebrow="Локальные инструменты" title="Подготовьтесь к проекту на своём устройстве" text="Подбор, бриф, избранное, сравнение и чек-листы работают без отправки контактов. Вы сохраняете контроль над введёнными параметрами." metrics={[["13", "самостоятельных инструментов"], ["0", "обязательных регистраций"], ["100%", "локальная работа"]]} />
+      <section className="inner-section tools-section"><div className="shell tools-grid">{tools.map((item, index) => <Link className="tool-card" href={item.href} key={item.href}><div className="tool-card-top"><span>{item.icon}</span><small>{item.tag}</small></div><BrandGlyph /><p>{String(index + 1).padStart(2, "0")}</p><h2>{item.title}</h2><div>{item.text}</div><i><Icon name="arrow" /></i></Link>)}</div></section>
+      <ManagerBanner title="Инструмент дал направление — уточним решение" text="После локального расчёта или брифа позвоните менеджеру и продиктуйте ключевые параметры, не отправляя контакты через сайт." product="подбор климатической системы" secondaryHref="/brief" secondaryLabel="Собрать технический бриф" />
     </InnerLayout>
   );
 }

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import CatalogClient from "../../catalog/catalog-client";
 import { brandProfiles } from "../../site-content";
-import { InnerLayout, PageIntro } from "../../site-shell";
+import { InnerLayout, ManagerBanner, PageIntro } from "../../site-shell";
 
 export const dynamicParams = false;
 
@@ -24,6 +24,7 @@ export default async function BrandPage({ params }: { params: Promise<{ brand: s
     <InnerLayout>
       <PageIntro eyebrow={`Бренд · ${brand.lead}`} title={brand.name} lead={brand.description} fallback="/brands" />
       <section className="inner-section catalog-section"><div className="shell"><CatalogClient initialBrand={brand.name} /></div></section>
+      <ManagerBanner title={`Поможем выбрать серию ${brand.name}`} text="Сообщите параметры помещения и приоритеты — менеджер уточнит доступные варианты, актуальную цену и следующий шаг подбора." product={`${brand.name} — подбор серии`} secondaryHref="/calculator" secondaryLabel="Оценить требуемую мощность" />
     </InnerLayout>
   );
 }

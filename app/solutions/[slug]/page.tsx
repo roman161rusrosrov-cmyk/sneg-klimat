@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { objectSolutions } from "../../site-content";
-import { InnerLayout, PageIntro, Icon } from "../../site-shell";
+import { BrandGlyph, InnerLayout, ManagerBanner, PageIntro, Icon } from "../../site-shell";
 
 export const dynamicParams = false;
 export function generateStaticParams() { return objectSolutions.map((item) => ({ slug: item.slug })); }
@@ -17,7 +17,8 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
   return (
     <InnerLayout>
       <PageIntro eyebrow="Решение по объекту" title={item.title} lead={item.summary} fallback="/solutions" />
-      <section className="inner-section"><div className="shell solution-detail-grid"><article className="solution-symbol"><span>{item.icon}</span><strong>{item.hint}</strong></article><div><p className="kicker">Что проверить до подбора</p><h2>Исходные данные</h2><ul className="check-list">{item.checks.map((check) => <li key={check}><Icon name="check" />{check}</li>)}</ul><div className="product-actions"><Link className="button button-primary" href="/calculator">Открыть калькулятор <Icon name="arrow" /></Link><Link className="button button-ghost" href="/catalog">Перейти в каталог</Link></div></div></div></section>
+      <section className="inner-section solution-detail-section"><div className="shell solution-detail-grid"><article className="solution-symbol"><BrandGlyph /><span>{item.icon}</span><strong>{item.hint}</strong><small>СНЕГ · решение по объекту</small></article><div><p className="kicker">Что проверить до подбора</p><h2>Исходные данные</h2><ul className="check-list">{item.checks.map((check) => <li key={check}><Icon name="check" />{check}</li>)}</ul><div className="product-actions"><Link className="button button-primary" href="/calculator">Открыть калькулятор <Icon name="arrow" /></Link><Link className="button button-ghost" href="/catalog">Перейти в каталог</Link></div></div></div></section>
+      <ManagerBanner title={`Обсудить решение для категории «${item.title}»`} text="Менеджер уточнит режимы, ограничения объекта и состав исходных данных, после чего можно переходить к инженерному расчёту." product={`климатическое решение: ${item.title}`} secondaryHref="/brief" secondaryLabel="Подготовить бриф" />
     </InnerLayout>
   );
 }

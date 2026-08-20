@@ -107,6 +107,72 @@ export function PriceCall({ product, compact = false }: { product: string; compa
   );
 }
 
+export function CategoryShowcase({
+  eyebrow,
+  title,
+  text,
+  metrics,
+  tone = "blue",
+}: {
+  eyebrow: string;
+  title: string;
+  text: string;
+  metrics: readonly (readonly [string, string])[];
+  tone?: "blue" | "ice" | "navy" | "mint";
+}) {
+  return (
+    <section className={`inner-section category-showcase-section category-showcase-${tone}`}>
+      <div className="shell category-showcase">
+        <div className="category-showcase-copy">
+          <div className="category-showcase-sign"><BrandGlyph /><span>СНЕГ · система раздела</span></div>
+          <p className="kicker kicker-light">{eyebrow}</p>
+          <h2>{title}</h2>
+          <p>{text}</p>
+        </div>
+        <div className="category-showcase-metrics">
+          {metrics.map(([value, label]) => <article key={`${value}-${label}`}><strong>{value}</strong><span>{label}</span></article>)}
+        </div>
+        <div className="category-showcase-glyphs" aria-hidden="true"><BrandGlyph /><BrandGlyph /></div>
+      </div>
+    </section>
+  );
+}
+
+export function ManagerBanner({
+  title,
+  text,
+  product,
+  eyebrow = "Связь с менеджером",
+  secondaryHref,
+  secondaryLabel,
+}: {
+  title: string;
+  text: string;
+  product: string;
+  eyebrow?: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+}) {
+  return (
+    <section className="inner-section manager-banner-section">
+      <div className="shell manager-banner">
+        <div className="manager-banner-copy">
+          <BrandMark inverse />
+          <p className="kicker kicker-light">{eyebrow}</p>
+          <h2>{title}</h2>
+          <p>{text}</p>
+          {secondaryHref && secondaryLabel && <Link className="manager-secondary" href={secondaryHref}>{secondaryLabel}<Icon name="arrow" /></Link>}
+        </div>
+        <div className="manager-banner-contact">
+          <PriceCall product={product} />
+          <small>Прямой звонок · без формы и регистрации</small>
+        </div>
+        <div className="manager-banner-glyphs" aria-hidden="true"><BrandGlyph /><BrandGlyph /><BrandGlyph /></div>
+      </div>
+    </section>
+  );
+}
+
 export function PageIntro({ eyebrow, title, lead, fallback = "/" }: { eyebrow: string; title: string; lead: string; fallback?: string }) {
   return (
     <section className="inner-hero">
