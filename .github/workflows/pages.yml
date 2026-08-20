@@ -36,6 +36,7 @@ jobs:
         env:
           GITHUB_PAGES: "true"
           NEXT_PUBLIC_SITE_URL: https://roman161rusrosrov-cmyk.github.io/sneg-klimat/
+          NEXT_PUBLIC_BASE_PATH: /sneg-klimat
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5

@@ -1,7 +1,13 @@
 "use client";
 
+/* Catalog images are already normalized WebP assets and must keep their static public paths. */
+/* eslint-disable @next/next/no-img-element */
+
+import Link from "next/link";
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { faqs, objects, series, serviceSteps, type SeriesRecord } from "./catalog-data";
+import { publicAsset } from "./public-path";
+import { objectSolutions } from "./site-content";
 
 const brandNames = ["Все", "Haier", "Chigo", "JAX", "Rovex", "Vickers"] as const;
 const brandAliases: Record<string, string> = {
@@ -54,10 +60,8 @@ function scrollToId(id: string) {
 
 function SeriesArtwork({ record }: { record: SeriesRecord }) {
   return (
-    <div className={`series-art series-art-${record.brand.toLowerCase()}`} aria-hidden="true">
-      <span className="series-brand-word">{record.brand}</span>
-      <div className="mini-unit"><i/><b/></div>
-      <div className="art-air art-air-a"/><div className="art-air art-air-b"/>
+    <div className="series-art series-art-photo" aria-hidden="true">
+      <img src={publicAsset(`/catalog/${record.slug}.webp`)} alt="" width="1000" height="1000" loading="lazy" />
     </div>
   );
 }
@@ -149,11 +153,6 @@ export default function SiteClient() {
     localStorage.setItem("sneg-compare", JSON.stringify(next));
   }
 
-  function chooseObject(title: string) {
-    setObjectType(title);
-    scrollToId("calculator");
-  }
-
   function downloadBrief() {
     const content = [
       "СНЕГ — предварительный климатический бриф",
@@ -185,13 +184,13 @@ export default function SiteClient() {
       <a className="skip-link" href="#content">К содержанию</a>
       <header className="site-header">
         <div className="shell header-inner">
-          <a className="logo-link" href="#top" onClick={closeAll}><BrandMark /></a>
+          <Link className="logo-link" href="/" onClick={closeAll}><BrandMark /></Link>
           <nav className="desktop-nav" aria-label="Основная навигация">
-            <a href="#catalog">Каталог</a><a href="#solutions">Решения</a><a href="#vrf">VRV / VRF</a><a href="#services">Услуги</a><a href="#guides">База знаний</a>
+            <Link href="/catalog">Каталог</Link><Link href="/brands">Бренды</Link><Link href="/solutions">Решения</Link><Link href="/vrf">VRV / VRF</Link><Link href="/services">Услуги</Link><Link href="/guides">База знаний</Link>
           </nav>
           <div className="header-actions">
             <button className="icon-button" aria-label="Открыть поиск" onClick={() => setSearchOpen(true)}><Icon name="search" /></button>
-            <button className="header-cta" onClick={() => scrollToId("calculator")}>Получить расчёт</button>
+            <Link className="header-cta" href="/calculator">Получить расчёт</Link>
             <button className="menu-button" aria-label="Открыть меню" onClick={() => setMenuOpen(true)}><Icon name="menu" /></button>
           </div>
         </div>
@@ -205,8 +204,8 @@ export default function SiteClient() {
             <h1>Комфортный климат.<br/><em>Точно по расчёту.</em></h1>
             <p className="hero-lead">Кондиционеры, вентиляция и VRV/VRF‑системы для квартиры, дома и бизнеса. От предварительного подбора до проекта, монтажа и сервиса.</p>
             <div className="hero-actions">
-              <button className="button button-primary" onClick={() => scrollToId("calculator")}>Подобрать систему <Icon name="arrow" /></button>
-              <button className="button button-ghost" onClick={() => scrollToId("catalog")}>Смотреть каталог</button>
+              <Link className="button button-primary" href="/calculator">Подобрать систему <Icon name="arrow" /></Link>
+              <Link className="button button-ghost" href="/catalog">Смотреть каталог</Link>
             </div>
             <p className="data-note"><span><Icon name="check" /></span> Без вымышленных цен и характеристик — данные публикуются только после проверки источника</p>
           </div>
@@ -220,14 +219,14 @@ export default function SiteClient() {
             <div className="snow-dot dot-a"/><div className="snow-dot dot-b"/><div className="snow-dot dot-c"/>
           </div>
         </div>
-        <div className="shell brand-strip"><span>Подтверждённые бренды в каталоге</span><div>{brandNames.slice(1).map((item) => <button key={item} onClick={() => { setBrand(item); setFavoritesOnly(false); scrollToId("catalog"); }}>{item}</button>)}</div></div>
+        <div className="shell brand-strip"><span>Подтверждённые бренды в каталоге</span><div>{brandNames.slice(1).map((item) => <Link key={item} href={`/brands/${item.toLowerCase()}`}>{item}</Link>)}</div></div>
       </section>
 
       <section className="section section-objects" id="solutions">
         <div className="shell">
           <div className="section-head split-head"><div><p className="kicker">Быстрый старт</p><h2>Какой объект нужно охладить?</h2></div><p>Сценарий объекта влияет на тип системы, акустику, вентиляцию, трассы и сервисный доступ.</p></div>
           <div className="object-grid">
-            {objects.map((item) => <button className="object-card" key={item.title} onClick={() => chooseObject(item.title)}><span>{item.icon}</span><strong>{item.title}</strong><small>{item.hint}</small><i><Icon name="arrow" /></i></button>)}
+            {objectSolutions.map((item) => <Link className="object-card" href={`/solutions/${item.slug}`} key={item.slug}><span>{item.icon}</span><strong>{item.title}</strong><small>{item.hint}</small><i><Icon name="arrow" /></i></Link>)}
           </div>
         </div>
       </section>
@@ -256,10 +255,10 @@ export default function SiteClient() {
               const liked = favorites.includes(item.slug);
               const compared = compare.includes(item.slug);
               return <article className="series-card" key={item.slug}>
-                <SeriesArtwork record={item} />
+                <Link href={`/catalog/${item.slug}`} aria-label={`Открыть ${item.brand} ${item.name}`}><SeriesArtwork record={item} /></Link>
                 <div className="series-card-body">
                   <div className="card-labels"><span>{item.brand}</span>{item.new2026 && <b>Новинка 2026</b>}</div>
-                  <h3>{item.name}</h3>
+                  <h3><Link href={`/catalog/${item.slug}`}>{item.name}</Link></h3>
                   <div className="verified-meta">
                     {item.technology !== "not-confirmed" && <span>{item.technology === "inverter" ? "Инвертор" : "On / Off"}</span>}
                     {item.refrigerant && <span>{item.refrigerant}</span>}
@@ -268,7 +267,7 @@ export default function SiteClient() {
                   <p className="model-line">{item.models.slice(0, 3).join(" · ")}{item.models.length > 3 ? ` · +${item.models.length - 3}` : ""}</p>
                   {item.variants && <p className="variant-line">Варианты: {item.variants.join(", ")}</p>}
                   <div className="series-actions">
-                    <button className="text-link" onClick={() => { if (!compared) toggleCompare(item.slug); setCompareOpen(true); }}>Сравнить серию <Icon name="arrow"/></button>
+                    <Link className="text-link" href={`/catalog/${item.slug}`}>Открыть серию <Icon name="arrow"/></Link>
                     <button className={`round-action${liked ? " active" : ""}`} aria-label={liked ? "Удалить из избранного" : "Добавить в избранное"} aria-pressed={liked} onClick={() => toggleFavorite(item.slug)}><Icon name="heart"/></button>
                     <button className={`round-action${compared ? " active" : ""}`} aria-label={compared ? "Убрать из сравнения" : "Добавить к сравнению"} aria-pressed={compared} onClick={() => toggleCompare(item.slug)}><Icon name="compare"/></button>
                   </div>
@@ -287,7 +286,7 @@ export default function SiteClient() {
             <h2>VRV/VRF для объектов со сложной логикой климата</h2>
             <p>Одна система может обслуживать множество зон, но её нельзя подбирать по одной площади. Нужны планы, режимы, теплопритоки, трассы, перепады, одновременность и требования к управлению.</p>
             <div className="vrf-pills"><span>Тепловой насос</span><span>Рекуперация тепла</span><span>BMS</span><span>Центральное управление</span></div>
-            <button className="button button-light" onClick={() => { setObjectType("Коммерческий объект"); setZones(6); scrollToId("calculator"); }}>Сформировать бриф <Icon name="arrow"/></button>
+            <Link className="button button-light" href="/vrf">Открыть раздел VRV/VRF <Icon name="arrow"/></Link>
           </div>
           <div className="vrf-diagram" aria-label="Схема VRV/VRF-системы">
             <div className="vrf-outdoor"><i/><i/><i/><span>Наружный блок</span></div>
@@ -348,17 +347,17 @@ export default function SiteClient() {
         <div className="shell faq-grid"><div><p className="kicker">Коротко о важном</p><h2>Частые вопросы</h2><p>Без рекламных обещаний и опасных советов по самостоятельному ремонту.</p></div><div className="faq-list">{faqs.map((item, index) => <details key={item.q} open={index === 0}><summary>{item.q}<span>+</span></summary><p>{item.a}</p></details>)}</div></div>
       </section>
 
-      <section className="final-cta"><div className="shell final-cta-inner"><div><p className="kicker kicker-light">Начните с исходных данных</p><h2>Подготовьте климатический бриф за пару минут</h2><p>Получите понятный файл с параметрами объекта и предварительным диапазоном мощности — без передачи персональных данных.</p></div><button className="button button-light" onClick={() => scrollToId("calculator")}>Перейти к расчёту <Icon name="arrow"/></button></div></section>
+      <section className="final-cta"><div className="shell final-cta-inner"><div><p className="kicker kicker-light">Начните с исходных данных</p><h2>Подготовьте климатический бриф за пару минут</h2><p>Получите понятный файл с параметрами объекта и предварительным диапазоном мощности — без передачи персональных данных.</p></div><Link className="button button-light" href="/calculator">Перейти к расчёту <Icon name="arrow"/></Link></div></section>
 
-      <footer><div className="shell footer-grid"><div><BrandMark inverse/><p>Кондиционирование, вентиляция и VRV/VRF‑системы. Инженерный каталог на проверяемых данных.</p></div><nav aria-label="Навигация в подвале"><strong>Разделы</strong><a href="#catalog">Каталог</a><a href="#vrf">VRV / VRF</a><a href="#services">Услуги</a><a href="#calculator">Калькулятор</a></nav><div><strong>Принципы</strong><p>Цена, наличие, гарантия, контакты и реквизиты не публикуются до подтверждения владельцем.</p></div></div><div className="shell footer-bottom"><span>© 2026 СНЕГ</span><span>Расчёты на сайте имеют предварительный характер</span></div></footer>
+      <footer><div className="shell footer-grid"><div><BrandMark inverse/><p>Кондиционирование, вентиляция и VRV/VRF‑системы. Инженерный каталог на проверяемых данных.</p></div><nav aria-label="Навигация в подвале"><strong>Разделы</strong><Link href="/catalog">Каталог</Link><Link href="/brands">Бренды</Link><Link href="/solutions">Решения</Link><Link href="/vrf">VRV / VRF</Link><Link href="/services">Услуги</Link><Link href="/guides">База знаний</Link><Link href="/calculator">Калькулятор</Link></nav><div><strong>Принципы</strong><p>Цена, наличие, гарантия, контакты и реквизиты не публикуются до подтверждения владельцем.</p></div></div><div className="shell footer-bottom"><span>© 2026 СНЕГ</span><span>Расчёты на сайте имеют предварительный характер</span></div></footer>
 
-      <nav className="mobile-bottom" aria-label="Мобильная навигация"><button onClick={() => scrollToId("top")}><Icon name="home"/><span>Главная</span></button><button onClick={() => { setFavoritesOnly(false); scrollToId("catalog"); }}><Icon name="catalog"/><span>Каталог</span></button><button onClick={() => setSearchOpen(true)}><Icon name="search"/><span>Поиск</span></button><button onClick={() => { setBrand("Все"); setQuery(""); setNewOnly(false); setFavoritesOnly(true); scrollToId("catalog"); }}><Icon name="heart"/><span>Избранное</span>{favorites.length > 0 && <b>{favorites.length}</b>}</button><button onClick={() => scrollToId("calculator")}><Icon name="calc"/><span>Расчёт</span></button></nav>
+      <nav className="mobile-bottom" aria-label="Мобильная навигация"><Link href="/"><Icon name="home"/><span>Главная</span></Link><Link href="/catalog"><Icon name="catalog"/><span>Каталог</span></Link><button onClick={() => setSearchOpen(true)}><Icon name="search"/><span>Поиск</span></button><button onClick={() => { setBrand("Все"); setQuery(""); setNewOnly(false); setFavoritesOnly(true); scrollToId("catalog"); }}><Icon name="heart"/><span>Избранное</span>{favorites.length > 0 && <b>{favorites.length}</b>}</button><Link href="/calculator"><Icon name="calc"/><span>Расчёт</span></Link></nav>
 
       {compare.length > 0 && <div className="compare-bar"><div><Icon name="compare"/><span><strong>{compare.length}</strong> из 4 серий</span><div className="compare-dots">{selectedCompare.map((item) => <i key={item.slug}>{item.brand.slice(0,1)}</i>)}</div></div><button onClick={() => setCompareOpen(true)}>Сравнить</button><button className="compare-clear" aria-label="Очистить сравнение" onClick={() => { setCompare([]); localStorage.setItem("sneg-compare", "[]"); }}><Icon name="close"/></button></div>}
 
-      {menuOpen && <div className="overlay" role="dialog" aria-modal="true" aria-label="Меню"><button className="overlay-backdrop" aria-label="Закрыть меню" onClick={() => setMenuOpen(false)}/><aside className="menu-panel"><div className="panel-head"><BrandMark/><button aria-label="Закрыть меню" onClick={() => setMenuOpen(false)}><Icon name="close"/></button></div><nav>{[["catalog","Каталог"],["solutions","Решения по объекту"],["vrf","VRV / VRF"],["services","Услуги"],["guides","База знаний"],["calculator","Предварительный расчёт"]].map(([id,label]) => <button key={id} onClick={() => { setMenuOpen(false); setTimeout(() => scrollToId(id), 50); }}>{label}<Icon name="arrow"/></button>)}</nav><p>Контактные данные будут доступны после подтверждения владельцем — без публичных заглушек.</p></aside></div>}
+      {menuOpen && <div className="overlay" role="dialog" aria-modal="true" aria-label="Меню"><button className="overlay-backdrop" aria-label="Закрыть меню" onClick={() => setMenuOpen(false)}/><aside className="menu-panel"><div className="panel-head"><BrandMark/><button aria-label="Закрыть меню" onClick={() => setMenuOpen(false)}><Icon name="close"/></button></div><nav>{[["/catalog","Каталог"],["/brands","Бренды"],["/solutions","Решения по объекту"],["/vrf","VRV / VRF"],["/services","Услуги"],["/guides","База знаний"],["/calculator","Предварительный расчёт"]].map(([href,label]) => <Link key={href} href={href} onClick={() => setMenuOpen(false)}>{label}<Icon name="arrow"/></Link>)}</nav><p>Контактные данные будут доступны после подтверждения владельцем — без публичных заглушек.</p></aside></div>}
 
-      {searchOpen && <div className="overlay search-overlay" role="dialog" aria-modal="true" aria-label="Поиск по сайту"><button className="overlay-backdrop" aria-label="Закрыть поиск" onClick={() => setSearchOpen(false)}/><section className="search-panel"><div className="panel-head"><strong>Поиск</strong><button aria-label="Закрыть поиск" onClick={() => setSearchOpen(false)}><Icon name="close"/></button></div><label className="big-search"><Icon name="search"/><span className="sr-only">Введите запрос</span><input autoFocus value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Например: Coral, AS25HPL2HRA или Хайер"/></label>{query ? <div className="search-results"><p>Результаты: {globalResults.length}</p>{globalResults.map((item) => <button key={item.slug} onClick={() => { setBrand(item.brand); setSearchOpen(false); setTimeout(() => scrollToId("catalog"), 50); }}><span><small>{item.brand}</small><strong>{item.name}</strong><em>{item.models.slice(0,3).join(" · ")}</em></span><Icon name="arrow"/></button>)}{globalResults.length === 0 && <div className="empty-search">Проверьте написание или введите модель без дефисов.</div>}</div> : <div className="search-hints"><span>Популярные направления</span>{["Haier Coral", "Chigo Sunrise", "Новинки 2026", "VRV / VRF"].map((hint) => <button key={hint} onClick={() => setQuery(hint)}>{hint}</button>)}</div>}</section></div>}
+      {searchOpen && <div className="overlay search-overlay" role="dialog" aria-modal="true" aria-label="Поиск по сайту"><button className="overlay-backdrop" aria-label="Закрыть поиск" onClick={() => setSearchOpen(false)}/><section className="search-panel"><div className="panel-head"><strong>Поиск</strong><button aria-label="Закрыть поиск" onClick={() => setSearchOpen(false)}><Icon name="close"/></button></div><label className="big-search"><Icon name="search"/><span className="sr-only">Введите запрос</span><input autoFocus value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Например: Coral, AS25HPL2HRA или Хайер"/></label>{query ? <div className="search-results"><p>Результаты: {globalResults.length}</p>{globalResults.map((item) => <Link key={item.slug} href={`/catalog/${item.slug}`} onClick={() => setSearchOpen(false)}><span><small>{item.brand}</small><strong>{item.name}</strong><em>{item.models.slice(0,3).join(" · ")}</em></span><Icon name="arrow"/></Link>)}{globalResults.length === 0 && <div className="empty-search">Проверьте написание или введите модель без дефисов.</div>}</div> : <div className="search-hints"><span>Популярные направления</span>{["Haier Coral", "Chigo Sunrise", "Новинки 2026", "VRV / VRF"].map((hint) => <button key={hint} onClick={() => setQuery(hint)}>{hint}</button>)}</div>}</section></div>}
 
       {compareOpen && <div className="overlay" role="dialog" aria-modal="true" aria-label="Сравнение серий"><button className="overlay-backdrop" aria-label="Закрыть сравнение" onClick={() => setCompareOpen(false)}/><section className="compare-panel"><div className="panel-head"><div><small>До четырёх позиций</small><strong>Сравнение серий</strong></div><button aria-label="Закрыть сравнение" onClick={() => setCompareOpen(false)}><Icon name="close"/></button></div><div className="compare-scroll"><table><thead><tr><th>Параметр</th>{selectedCompare.map((item) => <th key={item.slug}>{item.brand}<strong>{item.name}</strong></th>)}</tr></thead><tbody><tr><th>Моделей в карте</th>{selectedCompare.map((item) => <td key={item.slug}>{item.models.length}</td>)}</tr>{selectedCompare.some((item) => item.technology !== "not-confirmed") && <tr><th>Тип</th>{selectedCompare.map((item) => <td key={item.slug}>{item.technology === "inverter" ? "Инвертор" : item.technology === "on-off" ? "On / Off" : "—"}</td>)}</tr>}<tr><th>Новинка 2026</th>{selectedCompare.map((item) => <td key={item.slug}>{item.new2026 ? "Да" : "—"}</td>)}</tr><tr><th>Проверенные обозначения</th>{selectedCompare.map((item) => <td key={item.slug}>{item.models.slice(0,4).join(", ")}</td>)}</tr></tbody></table></div><p className="compare-note">Технические параметры не сравниваются, пока не связаны с паспортом конкретной модели. Отсутствие значения не считается недостатком.</p></section></div>}
     </main>
